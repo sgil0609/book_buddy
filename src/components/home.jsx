@@ -17,10 +17,14 @@ export default function Home() {
         <div>
             <h1>Welcome to the library</h1>
             {
-                hasToken ?
-                <Link to="/my-account" className="my-account-button">My Account</Link> :
-                <Link to="/signup" className="sign-up-button">Sign Up Here!</Link>
-            }
+    hasToken ?
+    <Link to="/account" className="my-account-button">My Account</Link> :
+    <>
+        <Link to="/signup" className="sign-up-button">Sign Up Here!</Link>
+        <br />
+        <Link to="/login" className="login-button">Login</Link>
+    </>
+}
         </div>
     );
 }
