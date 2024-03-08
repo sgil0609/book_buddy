@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
-function Account() {
-    const [books, setBooks] = useState([]); // Initialize as an empty array
+function Books() {
+    const [books, setBooks] = useState([]);
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,10 +26,7 @@ function Account() {
                 }
 
                 const data = await response.json();
-                console.log(data); // Log to see the structure
-                
-                // Adjust according to the structure of your data
-                setBooks(Array.isArray(data) ? data : data.books); // Example adjustment
+                setBooks(Array.isArray(data) ? data : data.books);
             } catch (error) {
                 console.error("Failed to fetch data:", error);
             }
@@ -36,15 +35,30 @@ function Account() {
         fetchData();
     }, []);
 
+    const viewBookDetails = (bookId) => {
+        navigate(`/book-details/${bookId}`); 
+    };
+
+    const goHome = () => {
+        navigate('/'); 
+    };
+    const goToAccount = () => {
+        navigate('/account'); 
+    };
+
     return (
         <div>
             <h1>All Books</h1>
+            <button onClick={goHome}>Go Home</button> 
+            <button onClick={goToAccount}>Account</button> 
             <ul>
                 {books.map((book, index) => (
                     <li key={index}>
                         <h3>{book.title}</h3>
                         <p>Author: {book.author}</p>
+                        <p>Available: {book.available}</p>
                         {book.coverimage && <img src={book.coverimage} alt={`Cover of ${book.title}`} style={{ maxWidth: '200px', maxHeight: '300px' }} />}
+                        <button onClick={() => viewBookDetails(book.id)}>View Details</button>
                     </li>
                 ))}
             </ul>
@@ -52,4 +66,4 @@ function Account() {
     );
 }
 
-export default Account;
+export default Books;

@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import Books from './components/Books'; // Import the MyAccount component
+import Books from './components/Books'; 
+import BookDetails from './components/BookDetails';
+import Checkout from './components/Checkout';
+import Account from './components/Account';
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/books" element={<Books />} /> 
+        <Route path="/book-details/:bookId" element={<BookDetails />} />
+        <Route path="/checkout/:bookId" element={<Checkout />} />
+        <Route path="Account" element={<Account />} />
       </Routes>
     </Router>
   );

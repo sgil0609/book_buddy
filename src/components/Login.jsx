@@ -10,7 +10,7 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const loginEndpoint = 'https://fsa-book-buddy-b6e748d1380d.herokuapp.com//api/users/login';
+        const loginEndpoint = 'https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login';
 
         try {
             const response = await fetch(loginEndpoint, {
