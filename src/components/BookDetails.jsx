@@ -16,7 +16,6 @@ function BookDetails() {
 
                 const data = await response.json();
                 setBook(data.book);
-                console.log(data.book)
             };
 
         fetchData();
