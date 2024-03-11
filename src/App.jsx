@@ -7,6 +7,7 @@ import Books from './components/Books';
 import BookDetails from './components/BookDetails';
 import Checkout from './components/Checkout';
 import Account from './components/Account';
+ import Return from './components/Return';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/book-details/:bookId" element={<BookDetails />} />
         <Route path="/checkout/:bookId" element={<Checkout />} />
         <Route path="Account" element={<Account />} />
+        <Route path="/return" element={<Return />} />
       </Routes>
     </Router>
   );

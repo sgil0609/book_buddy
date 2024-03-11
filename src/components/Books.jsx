@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function Books() {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate(); 
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,17 +47,29 @@ function Books() {
         navigate('/account'); 
     };
 
+
+        const filteredBooks = books.filter(
+            (book) => 
+                book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                book.author.toLowerCase().includes(searchQuery.toLowerCase())
+        );
     return (
         <div>
             <h1>All Books</h1>
+            <input
+                type="text"
+                placeholder="Search books..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ marginBottom: '20px' }}
+            />
             <button onClick={goHome}>Go Home</button> 
             <button onClick={goToAccount}>Account</button> 
             <ul>
-                {books.map((book, index) => (
+                {filteredBooks.map((book, index) => (
                     <li key={index}>
                         <h3>{book.title}</h3>
                         <p>Author: {book.author}</p>
-                        <p>Available: {book.available}</p>
                         {book.coverimage && <img src={book.coverimage} alt={`Cover of ${book.title}`} style={{ maxWidth: '200px', maxHeight: '300px' }} />}
                         <button onClick={() => viewBookDetails(book.id)}>View Details</button>
                     </li>

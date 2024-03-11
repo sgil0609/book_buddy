@@ -24,12 +24,15 @@ function BookDetails() {
     [bookId]);
 
     const handleCheckout = () => {
-        navigate(`/checkout/${bookId}`); // Navigate to Checkout
+        navigate(`/checkout/${bookId}`); 
     };
 
     if (!book) {
         return <div>Loading...</div>;
     }
+
+    const availabilityMessage = book.available ? "Yes" : "No";
+
     const goToAccount = () => {
         navigate('/account'); 
     };
@@ -44,7 +47,7 @@ function BookDetails() {
             <p>Author: {book.author}</p>
             <p>Title: {book.title}</p>
             <p>Desciption: {book.description}</p>
-            <p>Book Available: {book.available}</p>
+            <p>Book Available: {availabilityMessage}</p>
             <button onClick={handleCheckout}>Checkout</button>
             {book.coverimage && <img src={book.coverimage} alt={`Cover of ${book.title}`} style={{ maxWidth: '200px', maxHeight: '300px' }} />}
         </div>

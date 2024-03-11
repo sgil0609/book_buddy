@@ -2,71 +2,75 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Account() {
-    // State to hold the reservations data
-    const [reservations, setReservations] = useState([]);
+    const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchReservations = async () => {
+        const fetchUserData = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
                 console.error("No access token found");
                 return;
             }
             try {
-                setIsLoading(true); // Set loading state to true while fetching data
-                const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations', {
+                setIsLoading(true);
+                const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me', {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     },
                 });
                 if (!response.ok) {
-                    throw new Error('Network response was not ok'); 
+                    throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setReservations(data); 
-                setIsLoading(false); 
+                console.log(data);
+                setUserData(data); 
+                setIsLoading(false);
             } catch (error) {
-                setError(error.message); 
+                setError(error.message);
                 setIsLoading(false);
             }
         };
 
-        fetchReservations();
-    }, []); 
+        fetchUserData();
+    }, []);
+    const goToHome = () => navigate('/'); 
+    const goToBooks = () => navigate('/books'); 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
- const goToHome = () => navigate('/'); 
- const goToBooks = () => navigate('/books'); 
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
- if (isLoading) {
-     return <div>Loading...</div>;
- }
-
- if (error) {
-     return <div>Error: {error}</div>;
- }
-
- return (
-     <div>
-         <h2>My Reservations</h2>
-         <button onClick={goToHome}>Home</button>  {/* Button to navigate to Home */}
-         <button onClick={goToBooks}>Books</button>  {/* Button to navigate to Books page */}
-         {reservations.length > 0 ? (
-             <ul>
-                 {reservations.map((reservation, index) => (
-                     <li key={index}>
-                         {/* Reservation details */}
-                     </li>
-                 ))}
-             </ul>
-         ) : (
-             <p>No reservations found.</p>
-         )}
-     </div>
- );
+    return (
+        <div>
+            <h2>My Account</h2>
+            <button onClick={goToHome}>Home</button>
+            <button onClick={goToBooks}>Books</button>
+            <p>Name: {userData?.firstname} {userData?.lastname}</p> 
+            <p>Name: {userData?.email} </p> 
+            <h3>My Reservations:</h3>
+            {userData?.books?.length > 0 ? (
+                <ul>
+                    {userData.books.map((reservation, index) => (
+                        <li key={index}>
+                            <h3>Book Title: {reservation.title}</h3>
+                            <p>Book Author: {reservation.author}</p>
+                            <button onClick={() => navigate(`/return/${reservation.id}`)}>Return</button>
+                            {reservation.coverimage && <img src={reservation.coverimage} alt={`Cover of ${reservation.title}`} style={{ maxWidth: '200px', maxHeight: '300px' }} />}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No reservations found.</p>
+            )}
+        </div>
+    );
 }
 
 export default Account;
