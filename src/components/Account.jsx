@@ -47,12 +47,14 @@ function Account() {
     }
 
     return (
-        <div>
+        <div >
             <h2>My Account</h2>
             <button onClick={goToHome}>Home</button>
             <button onClick={goToBooks}>Books</button>
+            <div className='details'>
             <p>Name: {userData?.firstname} {userData?.lastname}</p> 
             <p>Name: {userData?.email} </p> 
+            </div>
             <h3>My Reservations:</h3>
             {userData?.books?.length > 0 ? (
                 <ul>

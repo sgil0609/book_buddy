@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
+
+
 function Books() {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate(); 
@@ -63,17 +65,21 @@ function Books() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ marginBottom: '20px' }}
             />
+            <div className="accountDetails">
             <button onClick={goHome}>Go Home</button> 
             <button onClick={goToAccount}>Account</button> 
+            </div>
             <ul>
                 {filteredBooks.map((book, index) => (
                     <li key={index}>
                         <h3>{book.title}</h3>
                         <p>Author: {book.author}</p>
                         {book.coverimage && <img src={book.coverimage} alt={`Cover of ${book.title}`} style={{ maxWidth: '200px', maxHeight: '300px' }} />}
+                        <div className="button-container">
                         <button onClick={() => viewBookDetails(book.id)}>View Details</button>
+                         </div>
                     </li>
-                ))}
+                ))} 
             </ul>
         </div>
     );

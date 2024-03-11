@@ -1,13 +1,127 @@
+/* index.css */
 body {
-  font-family: Georgia, serif;
-  background-color: #f8f8f8;
-  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+}
+
+h3 {
+  color: #333;
+  text-align: center;
+}
+.account {
+  color: #333;
+  text-align: center;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: flex;
+  margin: 10px auto; 
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+img {
+  display: block;
+  max-width: 200px;
+  max-height: 300px;
+  margin: 20px auto; /* Centers the image and provides spacing from text */
+  border-radius: 4px; /* Optional: Adds rounded corners to images */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
   padding: 0;
 }
 
-#logo-image {
-  width: 30px;
-  margin-right: 10px;
+li {
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-/* Add your own custom styles here */
+li img {
+  max-width: 200px;
+  max-height: 300px;
+  display: block;
+  margin: 10px auto;
+}
+
+li h3, li p {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically, if needed */
+  margin-top: 20px; /* Adjust based on your layout */
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for links to make them look like buttons */
+a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Specific styles for different links/buttons */
+.my-account-button, .view-books {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+}
+
+.my-account-button:hover, .view-books:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.sign-up-button, .login-button {
+  background-color: #008CBA; /* Blue background */
+  color: white; /* White text */
+}
+
+.sign-up-button:hover, .login-button:hover {
+  background-color: #007bb5; /* Darker blue on hover */
+}
+
+/* Additional styling for layout and spacing */
+div {
+  text-align: center; /* Center content */
+}
